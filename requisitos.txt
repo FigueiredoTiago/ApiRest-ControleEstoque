@@ -1,0 +1,9 @@
+Api para controle de Estoque:
+
+Requisitos Funcionais:
+
+1-Registro de Usuario
+2-login de Usuario
+3-criacao de Produto
+4-edicao de Produto
+5-exclucao de produto

@@ -1,0 +1,57 @@
+# Arquivos de compilação
+*.o
+*.out
+*.exe
+
+# Arquivos de log e cache
+logs/
+*.log
+*.swp
+*.cache
+
+# Arquivos de configuração sensíveis
+config.ini
+secrets.json
+
+# Ambientes virtuais
+venv/
+.env
+
+# Dependências e pacotes instalados
+node_modules/
+*.egg-info/
+
+# Arquivos temporários
+*.tmp
+
+# Arquivos de backup
+*~
+
+# Arquivos de mídia e recursos gerados
+media/
+dist/
+build/
+
+# Arquivos específicos de linguagens e IDEs
+*.pyc
+__pycache__/
+.vscode/
+.idea/
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos de documentação e gerados
+doc/
+docs/
+*.md
+
+# Arquivos de teste
+test/
+tests/
+*.test.*
+
+# Arquivos de inicialização de aplicativos
+*.pid
+*.run
