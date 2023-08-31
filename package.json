@@ -1,0 +1,12 @@
+{
+  "name": "apirestestoque",
+  "version": "1.0.0",
+  "description": "Api para um Sistema de Controle de Estoque",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "Tiago Figueiredo",
+  "license": "ISC"
+}
