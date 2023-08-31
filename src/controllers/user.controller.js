@@ -1,9 +1,16 @@
-//arquivo controller, responsavel por fazer a logica da rota
+//arquivo controller, responsavel por fazer a logica da rota dos usuarios
 
-const soma = (req, res) => {
-    const soma = 100 + 100;
 
-    res.send({ soma: soma });
+//controle para criar usuario
+const create = (req, res) => {
+    const { name, email, password } = req.body;
+
+    //validacoes
+    if (!name || !email || !password) {
+        res.status(400).send({ message: "Dados obrigatórios não foram informados!" });
+    }
+
+    res.status(201).send({ message: "Usuário criado com sucesso!"});
 };
 
-module.exports = { soma };
+module.exports = { create };
