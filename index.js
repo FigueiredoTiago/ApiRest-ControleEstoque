@@ -8,7 +8,10 @@ const userRoute = require('./src/routes/user.route');
 const connectDatabase = require('./src/database/db');
 connectDatabase();
 
-app.use('/user', userRoute);
+//middlewares
+const { userExists } = require('./src/middlewares/global.middlewares');
+
+app.use('/user', userExists, userRoute);
 
 app.listen(port, () => {
     console.log(`API listening on port: ${port}`);
