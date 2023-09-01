@@ -1,8 +1,8 @@
 //service e responsavel por fazer a comunicacao com o banco de dados
-const User = require('../models/User');
+import User from '../models/User.js';
 
 const createService = (body) => User.create(body);
 
-const getOneService = ({email}) => User.findOne( {email} );
+const getOneService = ({ email }) => User.findOne({ email });
 
-module.exports = { createService, getOneService};
+export default { createService, getOneService };

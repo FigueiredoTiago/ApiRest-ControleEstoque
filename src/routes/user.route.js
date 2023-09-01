@@ -1,6 +1,10 @@
-const route = require('express').Router();
-const userController = require('../controllers/user.controller');
+import express from 'express';
+const route = express.Router();
 
-route.post('/', userController.create);
+import { userExists } from '../middlewares/global.middlewares.js';
 
-module.exports = route;
+import userController from '../controllers/user.controller.js';
+
+route.post('/', userExists, userController.create);
+
+export default route;

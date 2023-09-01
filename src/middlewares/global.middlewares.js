@@ -1,8 +1,6 @@
-const mongoose = require('mongoose');
-const userService = require('../services/user.service');
+import userService from '../services/user.service.js';
 
-
-const userExists = async (req, res, next) => {
+export const userExists = async (req, res, next) => {
     try {
         const { name, email, password } = req.body;
         //validacoes
@@ -21,5 +19,3 @@ const userExists = async (req, res, next) => {
         res.status(500).send({ message: error.message });
     }
 };
-
-module.exports = { userExists };

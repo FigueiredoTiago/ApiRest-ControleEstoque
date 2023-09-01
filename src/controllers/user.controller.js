@@ -1,5 +1,5 @@
 //arquivo de controller usado para criar logica de negocio
-const userService = require('../services/user.service');
+import userService from '../services/user.service.js';
 
 //controle para criar usuario 
 const create = async (req, res) => {
@@ -13,4 +13,4 @@ const create = async (req, res) => {
     }
 };
 
-module.exports = { create };
+export default { create };
