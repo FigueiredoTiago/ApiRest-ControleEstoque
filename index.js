@@ -1,6 +1,8 @@
 import express from 'express';
+import dotenv from 'dotenv';
+dotenv.config();
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000;
 app.use(express.json());
 //Rotas do Usuario
 import userRoute from './src/routes/user.route.js';
