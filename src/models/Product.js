@@ -21,6 +21,10 @@ const ProductSchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
+  id_user: {
+    type: String,
+    required: true,
+  }, //apagar ou editar dps
 });
 
 const Product = mongoose.model("Product", ProductSchema);

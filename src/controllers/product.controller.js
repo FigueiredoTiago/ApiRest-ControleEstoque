@@ -11,7 +11,7 @@ const create = async (req, res) => {
         price,
         description,
         amount,
-        id_user: 'Id_example',
+        id_user: 'Id_example', //apagar ou editar dps
     });
     res.status(201).json({ message: "Produto criado com sucesso" });
 
@@ -21,7 +21,15 @@ const create = async (req, res) => {
 };
 
 const getAll = async (req, res) => {
-  const product = {};
+    try {
+        const products = await getAllService();
+        if(products.length === 0) {
+            return res.status(404).json({ message: "Nenhum produto cadastrado" });
+        }
+        res.status(200).json({ products: products });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 };
 
 export { create, getAll };
