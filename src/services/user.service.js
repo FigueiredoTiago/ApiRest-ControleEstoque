@@ -5,4 +5,6 @@ const createService = (body) => User.create(body);
 
 const getOneService = ({ email }) => User.findOne({ email });
 
-export default { createService, getOneService };
+const loginService = ({email}) => User.findOne({email}).select('+password');
+
+export default { createService, getOneService, loginService };
