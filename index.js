@@ -7,6 +7,8 @@ app.use(express.json());
 //Rotas do Usuario
 import userRoute from './src/routes/user.route.js';
 import authRoute from './src/routes/auth.route.js';
+//rotas do produto
+import productRoute from './src/routes/product.route.js';
 //Conexão com o banco de dados
 import connectDatabase from './src/database/db.js';
 connectDatabase();
@@ -14,6 +16,8 @@ connectDatabase();
 //usando as rotas
 app.use('/user', userRoute);
 app.use('/auth', authRoute);
+app.use('/product', productRoute);
+
 
 
 app.listen(port, () => {
