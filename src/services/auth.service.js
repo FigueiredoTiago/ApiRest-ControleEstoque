@@ -3,7 +3,17 @@ import jwt from "jsonwebtoken";
 
 const loginService = ({ email }) => User.findOne({ email }).select("+password");
 
-const generateToken = (id) =>
-  jwt.sign({id: id}, process.env.SECRET_JWT, { expiresIn: 86400 });
+const generateToken = (id) => {
+  return jwt.sign(id, process.env.SECRET_JWT, { expiresIn: 86400 });
+};
 
-export { loginService, generateToken };
+const findIdService = async (id) => {
+  try {
+    const user = await User.findById(id);
+    return user;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+export { loginService, generateToken, findIdService };
