@@ -2,6 +2,26 @@ import { createService, getAllService } from "../services/product.service.js";
 
 const create = async (req, res) => {
   try {
+    const {authorization} = req.headers;
+
+    if(!authorization) {
+      return res.status(401).json({ message: "Token não encontrado" });
+    }
+
+    const parts = authorization.split(' ');
+    const [schema, token] = parts;
+
+    if(parts.length !== 2) {
+      return res.status(401).json({ message: "Token Nao Informado!" });
+    }
+
+    if(schema !== 'Bearer') {
+      return res.status(401).json({ message: "Formato de Autorization Invalido!" });
+    }
+
+    console.log(authorization);
+
+
     const { name, price, description, amount } = req.body;
     if (!name || !price || !description || !amount) {
       return res.status(400).json({ message: "Preencha todos os Campos" });
