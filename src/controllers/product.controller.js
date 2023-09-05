@@ -1,9 +1,13 @@
-import { createService, getAllService } from "../services/product.service.js";
+import {
+  createService,
+  getAllService,
+  countProductService,
+} from "../services/product.service.js";
 
 const create = async (req, res) => {
   try {
     const { name, price, description, amount } = req.body;
-    
+
     if (!name || !price || !description || !amount) {
       return res.status(400).json({ message: "Preencha todos os Campos" });
     }
@@ -26,12 +30,44 @@ const create = async (req, res) => {
 };
 
 const getAll = async (req, res) => {
+  let { limit, offset } = req.query;
+
   try {
-    const products = await getAllService();
+    limit = Number(limit);
+    offset = Number(offset);
+
+    if (!limit) {
+      limit = 5;
+    }
+
+    if (!offset) {
+      offset = 0;
+    }
+
+    const products = await getAllService(limit, offset);
+
+    const total = await countProductService();
+
+    const currentUrl = req.baseUrl;
+
+    const next = offset + limit;
+
+    const nextUrl =
+      next < total ? `${currentUrl}?limit=${limit}&offset=${next}` : null;
+
+    const previous = offset - limit < 0 ? null : offset - limit;
+
+    const previousUrl =
+      previous != null
+        ? `${currentUrl}?limit=${limit}&offset=${previous}`
+        : null;
+
     if (products.length === 0) {
       return res.status(404).json({ message: "Nenhum produto cadastrado" });
     }
-    res.status(200).json({ products: products });
+
+    res.status(200).json({ nextUrl, previousUrl, limit, offset, total, results: products });
+
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
