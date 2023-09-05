@@ -3,8 +3,8 @@ import jwt from "jsonwebtoken";
 
 const loginService = ({ email }) => User.findOne({ email }).select("+password");
 
-const generateToken = (id) => {
-  return jwt.sign(id, process.env.SECRET_JWT, { expiresIn: 86400 });
+const generateToken = (auth) => {
+  return jwt.sign(auth, process.env.SECRET_JWT, { expiresIn: 86400 });
 };
 
 const findIdService = async (id) => {

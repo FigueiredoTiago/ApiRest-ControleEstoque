@@ -31,15 +31,9 @@ export const authMiddleware = async (req, res, next) => {
         return res.status(401).json({ message: "Token Invalido ou Expirado!" });
       }
 
-      const user = await findIdService(decoded.id);
-
-      if (!user) {
-        return res.status(401).json({ message: "Usuario não encontrado" });
-      }
-
-      req.userId = user._id;
-      return next();
+      req.userAuth = decoded.auth;
       
+      return next();
     });
   } catch (error) {
     return res.status(500).json({ message: "Erro no Servidor" });

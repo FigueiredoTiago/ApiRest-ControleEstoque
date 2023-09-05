@@ -3,10 +3,13 @@ import { createService, getAllService } from "../services/product.service.js";
 const create = async (req, res) => {
   try {
     const { name, price, description, amount } = req.body;
-    console.log(req.userId);
-
+    
     if (!name || !price || !description || !amount) {
       return res.status(400).json({ message: "Preencha todos os Campos" });
+    }
+
+    if (req.userAuth !== "admin") {
+      return res.status(401).json({ message: "Permissao Negada!" });
     }
 
     await createService({
@@ -14,7 +17,6 @@ const create = async (req, res) => {
       price,
       description,
       amount,
-      id_user: req.userId,
     });
 
     res.status(201).json({ message: "Produto criado com sucesso" });

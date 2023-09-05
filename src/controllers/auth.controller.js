@@ -18,11 +18,11 @@ const login = async (req, res) => {
       return res.status(401).json({ message: "Senha Invalida" });
     }
 
-    const token = generateToken({ id: user._id });
+    const token = generateToken({ auth: user.auth });
 
     return res
       .status(200)
-      .json({ message: "Login Efetuado com Sucesso", token: token });
+      .json({ message: "Login Efetuado com Sucesso", token: token, auth: user.auth });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
