@@ -3,6 +3,8 @@ import {
   getAllService,
   countProductService,
   findByIdService,
+  searchByNameService,
+  updateService,
 } from "../services/product.service.js";
 
 const create = async (req, res) => {
@@ -76,9 +78,9 @@ const getAll = async (req, res) => {
 };
 
 const findById = async (req, res) => {
-  const { id } = req.params;
-
   try {
+    const { id } = req.params;
+
     if (!id) {
       return res.status(400).json({ message: "Informe o ID do produto" });
     }
@@ -95,4 +97,51 @@ const findById = async (req, res) => {
   }
 };
 
-export { create, getAll, findById };
+const searchByName = async (req, res) => {
+  try {
+    const { name } = req.query;
+
+    const products = await searchByNameService(name);
+
+    if (products.length === 0) {
+      return res.status(404).json({ message: "Nenhum produto encontrado" });
+    }
+
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const update = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, price, description, amount } = req.body;
+
+    if (req.userAuth !== "admin") {
+      return res.status(401).json({ message: "Permissao Negada!" });
+    }
+
+    if (!name && !price && !description && !amount) {
+      return res
+        .status(400)
+        .json({ message: "Informe ao menos um campo para atualizar" });
+    }
+
+    const product = await findByIdService(id);
+
+    if (!product) {
+      return res.status(404).json({ message: "Produto não encontrado" });
+    }
+
+    await updateService(id, name, price, description, amount);
+
+    res.status(200).json({ message: "Produto atualizado com sucesso" });
+
+  } catch (error) {
+    
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export { create, getAll, findById, searchByName, update };
