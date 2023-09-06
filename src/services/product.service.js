@@ -7,4 +7,6 @@ const getAllService = async ( limit, offset ) => Product.find().sort({ name: 1 }
 
 const countProductService = async () => Product.countDocuments();
 
-export { createService, getAllService, countProductService};
+const findByIdService = async (id) => Product.findById(id);
+
+export { createService, getAllService, countProductService, findByIdService};
