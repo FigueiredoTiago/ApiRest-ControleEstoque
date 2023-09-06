@@ -5,6 +5,7 @@ import {
   findByIdService,
   searchByNameService,
   updateService,
+  deleteService,
 } from "../services/product.service.js";
 
 const create = async (req, res) => {
@@ -137,11 +138,32 @@ const update = async (req, res) => {
     await updateService(id, name, price, description, amount);
 
     res.status(200).json({ message: "Produto atualizado com sucesso" });
-
   } catch (error) {
-    
     res.status(500).json({ message: error.message });
   }
 };
 
-export { create, getAll, findById, searchByName, update };
+const deleteProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (req.userAuth !== "admin") {
+      return res.status(401).json({ message: "Permissao Negada!" });
+    }
+
+    const product = await findByIdService(id);
+
+    if (!product) {
+      return res.status(404).json({ message: "Produto não encontrado" });
+    }
+
+    await deleteService(id);
+
+    res.status(200).json({ message: "Produto deletado com sucesso" });
+    
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export { create, getAll, findById, searchByName, update, deleteProduct };

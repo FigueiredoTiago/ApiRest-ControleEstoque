@@ -8,6 +8,7 @@ import {
   findById,
   searchByName,
   update,
+  deleteProduct,
 } from "../controllers/product.controller.js";
 
 //middlewares
@@ -22,5 +23,7 @@ router.get("/search", searchByName);
 router.get("/:id", authMiddleware, findById);
 
 router.patch("/:id", authMiddleware, update);
+
+router.delete("/:id", authMiddleware, deleteProduct);
 
 export default router;

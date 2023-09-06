@@ -24,6 +24,8 @@ const updateService = async (id, name, price, description, amount) =>
     { name, price, description, amount, updated: Date.now() }
   );
 
+const deleteService = async (id) => Product.findOneAndDelete({ _id: id });
+
 export {
   createService,
   getAllService,
@@ -31,4 +33,5 @@ export {
   findByIdService,
   searchByNameService,
   updateService,
+  deleteService,
 };
