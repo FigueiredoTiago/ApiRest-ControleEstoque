@@ -3,7 +3,11 @@ import Product from "../models/Product.js";
 const createService = async (body) => Product.create(body);
 
 const getAllService = async (limit, offset) =>
-  Product.find().sort({ name: 1 }).skip(offset).limit(limit);
+  Product.find()
+    .collation({ locale: "en_US", strength: 2 })
+    .sort({ name: 1 })
+    .skip(offset)
+    .limit(limit);
 
 const countProductService = async () => Product.countDocuments();
 
@@ -17,8 +21,7 @@ const searchByNameService = async (name) =>
 const updateService = async (id, name, price, description, amount) =>
   Product.findOneAndUpdate(
     { _id: id },
-    { name, price, description, amount },
-    { rawResult: true }
+    { name, price, description, amount, updated: Date.now() }
   );
 
 export {
