@@ -1,6 +1,6 @@
+import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config();
-import jwt from "jsonwebtoken";
 import { findIdService } from "../services/auth.service.js";
 
 export const authMiddleware = async (req, res, next) => {
@@ -30,7 +30,6 @@ export const authMiddleware = async (req, res, next) => {
       if (err) {
         return res.status(401).json({ message: "Token Invalido ou Expirado!" });
       }
-
 
       const user = await findIdService(decoded.id);
 
