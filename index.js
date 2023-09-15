@@ -4,6 +4,8 @@ dotenv.config();
 const app = express()
 const port = process.env.PORT || 3000;
 app.use(express.json());
+import cors from 'cors';
+app.use(cors());
 //Rotas do Usuario
 import userRoute from './src/routes/user.route.js';
 import authRoute from './src/routes/auth.route.js';
@@ -13,7 +15,7 @@ import productRoute from './src/routes/product.route.js';
 import connectDatabase from './src/database/db.js';
 connectDatabase();
 
-//usando as rotas
+//rotas
 app.use('/user', userRoute);
 app.use('/auth', authRoute);
 app.use('/product', productRoute);
