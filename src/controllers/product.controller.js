@@ -135,9 +135,9 @@ const update = async (req, res) => {
       return res.status(404).json({ message: "Produto não encontrado" });
     }
 
-    await updateService(id, name, price, description, amount);
+    const productUpdated = await updateService(id, name, price, description, amount);
 
-    res.status(200).json({ message: "Produto atualizado com sucesso" });
+    res.status(200).json({ message: "Produto atualizado com sucesso", product: productUpdated });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -160,7 +160,7 @@ const deleteProduct = async (req, res) => {
     await deleteService(id);
 
     res.status(200).json({ message: "Produto deletado com sucesso" });
-    
+
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

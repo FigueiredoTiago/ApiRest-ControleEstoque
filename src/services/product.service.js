@@ -21,7 +21,8 @@ const searchByNameService = async (name) =>
 const updateService = async (id, name, price, description, amount) =>
   Product.findOneAndUpdate(
     { _id: id },
-    { name, price, description, amount, updated: Date.now() }
+    { name, price, description, amount, updated: Date.now() },
+    { new: true },
   );
 
 const deleteService = async (id) => Product.findOneAndDelete({ _id: id });
