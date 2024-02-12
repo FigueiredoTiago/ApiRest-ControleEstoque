@@ -1,6 +1,13 @@
 import Product from "../models/Product.js";
 
-const createService = async (body) => Product.create(body);
+const createService = async (body) => {
+  try {
+    const newProduct = await Product.create(body);
+    return newProduct;
+  } catch (error) {
+    throw new Error(`Erro ao criar o produto: ${error.message}`);
+  }
+}
 
 const getAllService = async (limit, offset) =>
   Product.find()

@@ -20,14 +20,14 @@ const create = async (req, res) => {
       return res.status(401).json({ message: "Permissao Negada!" });
     }
 
-    await createService({
+    const newProduct = await createService({
       name,
       price,
       description,
       amount,
     });
 
-    res.status(201).json({ message: "Produto criado com sucesso" });
+    res.status(201).json({ message: "Produto criado com sucesso", product: newProduct });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
