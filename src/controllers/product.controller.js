@@ -1,7 +1,6 @@
 import {
   createService,
   getAllService,
-  countProductService,
   findByIdService,
   searchByNameService,
   updateService,
@@ -34,37 +33,8 @@ const create = async (req, res) => {
 };
 
 const getAll = async (req, res) => {
-  let { limit, offset } = req.query;
-
   try {
-    limit = Number(limit);
-    offset = Number(offset);
-
-    if (!limit) {
-      limit = 5;
-    }
-
-    if (!offset) {
-      offset = 0;
-    }
-
-    const products = await getAllService(limit, offset);
-
-    const total = await countProductService();
-
-    const currentUrl = req.baseUrl;
-
-    const next = offset + limit;
-
-    const nextUrl =
-      next < total ? `${currentUrl}?limit=${limit}&offset=${next}` : null;
-
-    const previous = offset - limit < 0 ? null : offset - limit;
-
-    const previousUrl =
-      previous != null
-        ? `${currentUrl}?limit=${limit}&offset=${previous}`
-        : null;
+    const products = await getAllService();
 
     if (products.length === 0) {
       return res.status(404).json({ message: "Nenhum produto cadastrado" });
@@ -72,7 +42,7 @@ const getAll = async (req, res) => {
 
     res
       .status(200)
-      .json({ nextUrl, previousUrl, limit, offset, total, results: products });
+      .json({  results: products });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
