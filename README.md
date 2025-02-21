@@ -1,4 +1,6 @@
-# Controle de Estoque - Backend 🛠️
+# Controle de Estoque - Backend 🛠️ Acesse Aqui: https://easyestoque.vercel.app/
+
+#Nota de atualizações: 21/02/2025 - o Projeto passara por uma  refatoração Completa para Garantir a Qualidade do Aplicativo - Aguardem Novos Updates.
 
 ![EasyEstoque](https://i.imgur.com/T72fIE7.png);
 
