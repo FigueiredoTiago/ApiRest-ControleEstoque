@@ -78,13 +78,13 @@ controle-de-estoque-backend/
 │
 ├── src/
 │   ├── controllers/         # Lógica de controle das rotas
-│   ├── models/              # Modelos de dados (Mongoose)
-│   ├── routes/              # Definições de rotas
-│   ├── middleware/          # Funções de middleware (autenticação, validação)
-│   ├── services/            # Lógica de negócio
-│   ├── utils/               # Funções utilitárias
-│   └── server.js            # Arquivo principal do servidor Express
-│
+│   ├── database/              # Modelos de dados (Mongoose)
+│   ├── middlewares/              # Definições de rotas
+│   ├── models/          # Funções de middleware (autenticação, validação)
+│   ├── routes/            # Lógica de negócio
+│   ├── services/               # Funções utilitárias
+│             
+│└── index.js  # Arquivo principal do servidor Express
 └── .env                     # Variáveis de ambiente (ex: MongoDB URI)
 ```
 
