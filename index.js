@@ -5,7 +5,21 @@ const app = express()
 const port = process.env.PORT || 3000;
 app.use(express.json());
 import cors from 'cors';
-app.use(cors());
+const allowedOrigins = [
+    'https://easyestoque.vercel.app',
+    'http://localhost:3000'
+];
+
+app.use(cors({
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true
+}));
 //Rotas do Usuario
 import userRoute from './src/routes/user.route.js';
 import authRoute from './src/routes/auth.route.js';
